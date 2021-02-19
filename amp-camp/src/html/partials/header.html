@@ -9,6 +9,36 @@
     <a href="/">
       <amp-img src="img/logo.png" width="120" height="37" layout="fixed" alt=""></amp-img>
     </a>
+
+    <!-- autocomplete: https://amp.dev/documentation/examples/components/amp-autocomplete/?format=websites -->
+    <!-- <script async custom-element="amp-autocomplete" src="https://cdn.ampproject.org/v0/amp-autocomplete-0.1.js"></script> -->
+    <!-- <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script> -->
+    <!-- Optional: amp-bind is needed for dynamically changing the data source of an amp-autocomplete. -->
+    <!-- <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script> -->
+    <!-- Optional: amp-mustache is needed for rich-content templating and client-side rendering of form responses. -->
+    <!-- <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script> -->
+
+    <input
+      name="search"
+      type="search"
+      aria-label="Start typing to search"
+      required
+      placeholder="Start typing to search"
+      autocomplete="off"
+      value=""
+      on="
+        input-debounced:
+          AMP.setState({
+            youtube: {query: event.value}
+          }),
+          results.show;
+        tap:
+          AMP.setState({
+            youtube: {query: event.value}
+          }),
+          results.hide;"
+    />
+    <!-- amp-list [src]="'https://...' + youtube.query" -->
     <div class="cart-icon-container">
         <a href="/shopping-cart">
                 <amp-img src="img/campmor_backpack.png" width="35" height="27"></amp-img>
