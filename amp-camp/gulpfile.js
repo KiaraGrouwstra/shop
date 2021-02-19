@@ -16,6 +16,8 @@ const noop = require('gulp-noop');
 const through2 = require('through2');
 const mergeMediaQuery = require('gulp-merge-media-queries');
 const AmpOptimizer = require('@ampproject/toolbox-optimizer');
+const pug = require('gulp-pug');
+const pug_plugin_ng = require('pug-plugin-ng');
 
 const ampOptimizer = AmpOptimizer.create();
 
@@ -32,6 +34,10 @@ const paths = {
     css: {
         src: 'src/sass/**/*.scss',
         dest: 'src/css/'
+    },
+    pug: {
+        src: 'src/pug/**/*.html',
+        dest: 'src/html/',
     },
     html: {
         src: 'src/html/pages/*.html',
@@ -134,6 +140,13 @@ gulp.task('html', gulp.series('styles', function buildHtml() {
     .pipe(gulp.dest(paths.html.dest));
 }));
 
+const pug_opts = { doctype: 'html', plugins: [pug_plugin_ng] };
+gulp.task('pug', () =>
+  gulp.src(paths.pug.src)
+  .pipe(pug(pug_opts))
+  .pipe(gulp.dest(paths.pug.dest))
+);
+
 /**
  * Checks resulting output AMP HTML for validity.
  */
@@ -158,7 +171,7 @@ gulp.task('clean', function clean() {
 /**
  * Builds the output from sources.
  */
-gulp.task('build', gulp.series('images', 'favicon', 'rootConfig', 'html', 'server', 'validate'));
+gulp.task('build', gulp.series('images', 'favicon', 'rootConfig', 'pug', 'html', 'server', 'validate'));
 
 /**
  * First rebuilds the output then triggers a reload of the browser.
@@ -207,6 +220,7 @@ gulp.task('watch', function watch(done) {
     gulp.watch(paths.favicon.src, gulp.series('favicon'));
     gulp.watch(paths.rootConfig.src, gulp.series('rootConfig'));
     gulp.watch(paths.server.src, gulp.series('server'));
+    gulp.watch(paths.pug.src, gulp.series('pug'));
     gulp.watch('src/html/**/*.html', gulp.series('rebuild'));
     gulp.watch(paths.css.src, gulp.series('rebuild'));
     done();
