@@ -1,0 +1,32 @@
+{
+    "@context": "http://schema.org/",
+    "@type": "Review",
+    // The document referenced in mainEntityOfPage should be the same as the canonical link above.
+    //All marked-up URLs should be absolute.
+    "mainEntityOfPage": "http://example.ampproject.org/review-metadata.html",
+    "itemReviewed": {
+      "@type": "Restaurant",
+      "name": "Legal Seafood"
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "4"
+    },
+    "name": "A good seafood place.",
+    "author": {
+      "@type": "Person",
+      "name": "Bob Smith"
+    },
+    "reviewBody": "The seafood is great.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Google",
+      "logo": {
+        "@type": "ImageObject",
+        // The "logo" dimensions must not exceed 600x60.
+        "url": "http://cdn.ampproject.org/logo.jpg",
+        "width": 600,
+        "height": 60
+      }
+    }
+}

@@ -5,6 +5,51 @@
     %%include('../partials/head.html', {
         "pageType": "product-details"
     })
+<script type="application/ld+json">
+    <!-- %%include('./product-ld.json') -->
+    {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": "Executive Anvil",
+        // All marked-up URLs should be absolute.
+        // The leader "image" referenced in the markup below must appear somewhere on the AMP HTML document itself.
+        // The URL for that "image" must precisely match the src of the amp-img tag.
+        "image": "http://www.example.com/anvil_executive.jpg",
+        "description": "Sleeker than ACME's Classic Anvil, the Executive Anvil is perfect for the business traveler looking for something to drop from a height.",
+        "mpn": "925872",
+        // "logo": "http://www.example.com/logo.png",
+        "logo": {
+            "@type": "ImageObject",
+            // The "logo" dimensions must not exceed 600x60.
+            "url": "http://cdn.ampproject.org/logo.jpg",
+            "width": 600,
+            "height": 60
+        },
+        // "category": "Widgets",
+        // "brand": "Acme",
+        "brand": {
+          "@type": "Thing",
+          "name": "ACME"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.4",
+          "reviewCount": "89"
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "119.99",
+          "priceValidUntil": "2020-11-05",
+          "itemCondition": "http://schema.org/UsedCondition",
+          "availability": "http://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Executive Objects"
+          }
+        }
+    }
+</script>
 </head>
 <body [class]="cart.added ? 'cart-added' : ''">
     %%include('../partials/header.html', {
